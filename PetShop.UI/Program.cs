@@ -11,14 +11,21 @@ namespace PetShop.UI
     {
         static void Main(string[] args)
         {
-            
-            IPetRepository petRepository = new PetRepository();
-            FakeDB.InitData();
-            IPetService petService = new PetService(petRepository);
-            //var Printer = new Printer();
-            var printer = new Printer(petService);
-            //printer.PrintAllPets();
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddScoped<IPetRepository, PetRepository>();
+            serviceCollection.AddScoped<IPetService, PetService>();
+            serviceCollection.AddScoped<IPrinter, Printer>();
 
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            var printer = serviceProvider.GetRequiredService<IPrinter>();
+            FakeDB.InitData();
+            printer.StartUi();
+
+            //IPetRepository petRepository = new PetRepository();
+            //IPetService petService = new PetService(petRepository);
+            //var printer = new Printer(petService);
+
+            
 
         }
     }

@@ -14,5 +14,7 @@ namespace PetShop.Core.AppService
         public void UpdatePet(int petId, string name, string type, DateTime birthDate, DateTime soldDate, string color, string privousOwner, double price);
         public List<Pet> GetOneTypeOfPets(String type);
         public List<Pet> OrderByPrice();
+        public List<Pet> FiveCheepest();
+
     }
 }

@@ -28,6 +28,15 @@ namespace PetShop.Core.AppService.Service
             return _petRepository.AddPet(pet);
         }
 
+        public List<Pet> FiveCheepest()
+        {
+            
+            var pricelist = (List<Pet>)_petRepository.OrderByPrice();
+            while (pricelist.Count > 5)
+                pricelist.RemoveAt(pricelist.Count - 1);
+            return pricelist;
+        }
+
         public List<Pet> GetOneTypeOfPets(string type)
         {
             return (List<Pet>)_petRepository.GetOneTypeOfPets(type);

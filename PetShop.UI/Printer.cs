@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PetShop.UI
 {
-    public class Printer
+    public class Printer : IPrinter
     {
         private IPetService _petService;
         
@@ -106,9 +106,7 @@ namespace PetShop.UI
         }
         public void FiveCheepest()
         {
-            var pricelist = _petService.OrderByPrice();
-            while (pricelist.Count > 5)
-                pricelist.RemoveAt(pricelist.Count - 1);
+            var pricelist = _petService.FiveCheepest();
             Console.WriteLine("Printing 5 Cheepest pets.\n");
             foreach (var pet in pricelist)
                 {
@@ -132,8 +130,10 @@ namespace PetShop.UI
         public Printer(IPetService petService)
         {
             _petService = petService;
+            
+        }
+        public void StartUi() {
             var selection = ShowMenu();
-
             while (selection != 9)
             {
                 switch (selection)
