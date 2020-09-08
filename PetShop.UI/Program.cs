@@ -3,7 +3,7 @@ using PetShop.Core.AppService.Service;
 using PetShop.Core.DomainService;
 using PetShop.InfraStructure.Data;
 using System;
-//using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PetShop.UI
 {
