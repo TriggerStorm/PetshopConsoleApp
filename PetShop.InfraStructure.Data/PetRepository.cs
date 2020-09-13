@@ -8,7 +8,10 @@ namespace PetShop.InfraStructure.Data
 {
     public class PetRepository : IPetRepository
     {
-        
+        public PetRepository()
+        {
+            FakeDB.InitData();
+        }
 
         public IEnumerable<Pet> ReadPets()
         {
