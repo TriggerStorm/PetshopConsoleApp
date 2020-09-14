@@ -13,18 +13,8 @@ namespace PetShop.Core.AppService.Service
         {
             _petRepository = petRepository;
         }
-        public Pet CreatePet(String name, String type, DateTime birthDate, DateTime soldDate, String color, String previousOwner, double price)
+        public Pet CreatePet(Pet pet)
         {
-            var pet = new Pet
-            {
-                Name = name,
-                Type = type,
-                BirthDate = birthDate,
-                SoldDate = soldDate,
-                Color = color,
-                PreviousOwner = previousOwner,
-                Price = price
-            };
             return _petRepository.AddPet(pet);
         }
 
@@ -58,9 +48,9 @@ namespace PetShop.Core.AppService.Service
             _petRepository.deletePet(petID);
         }
 
-        public void UpdatePet(int petId, string name, string type, DateTime birthDate, DateTime soldDate, string color, string privousOwner, double price)
+        public Pet UpdatePet(Pet UpdatePet)
         {
-            _petRepository.UpdatePet(petId, name, type, birthDate, soldDate, color, privousOwner, price);
+            return _petRepository.UpdatePet(UpdatePet);
         }
     }
 }

@@ -12,8 +12,9 @@ namespace PetShop.Core.DomainService
 
         public Pet AddPet(Pet pet);
         public void deletePet(int PetID);
-        public void UpdatePet(int petId, string name, string type, DateTime birthDate, DateTime soldDate, string color, string privousOwner, double price);
+        public Pet UpdatePet(Pet updatePet);
         public IEnumerable<Pet> GetOneTypeOfPets(String type);
         public IEnumerable<Pet> OrderByPrice();
+        public Pet ReadyById(int id);
     }
 }

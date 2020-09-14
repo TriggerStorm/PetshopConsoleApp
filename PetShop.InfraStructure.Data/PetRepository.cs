@@ -2,6 +2,7 @@
 using PetShop.Core.Entites;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PetShop.InfraStructure.Data
@@ -10,37 +11,90 @@ namespace PetShop.InfraStructure.Data
     {
         public PetRepository()
         {
-            FakeDB.InitData();
+            if (FakeDB.pets.Count >= 1) return;
+            else
+            {
+                FakeDB.InitData();
+            }
         }
 
         public IEnumerable<Pet> ReadPets()
         {
-            return FakeDB.GetAllPets();
+            return FakeDB.pets;
         }
 
         public Pet AddPet(Pet pet)
         {
-            return FakeDB.AddPet(pet);
+            pet.Id = FakeDB.id++;
+            FakeDB.pets.Add(pet);
+            return pet;
+            
         }
 
         public void deletePet(int PetID)
         {
-            FakeDB.deletePet(PetID);
+            foreach (var pet in FakeDB.pets)
+            {
+                if (FakeDB.id == pet.Id)
+                {
+                    FakeDB.pets.Remove(pet);
+                    break;
+                }
+            }
         }
 
-        public void UpdatePet(int petId, string name, string type, DateTime birthDate, DateTime soldDate, string color, string privousOwner, double price)
+        public Pet ReadyById(int id)
         {
-            FakeDB.UpdatePet(petId, name, type, birthDate, soldDate, color, privousOwner, price);
+            return FakeDB.pets.
+                Select(p => new Pet()
+                { 
+                    Id = p.Id,
+                    Name = p.Name,
+                    Type = p.Type,
+                    BirthDate = p.BirthDate,
+                    SoldDate = p.SoldDate,
+                    Color = p.Color,
+                    PreviousOwner = p.PreviousOwner,
+                    Price = p.Price
+                }).
+                FirstOrDefault(p => p.Id == id);
+
+        }
+        public Pet UpdatePet(Pet updatePet)
+        {
+            var petFromDB = ReadyById(updatePet.Id);
+            if (petFromDB == null) return null;
+
+            petFromDB.Name = updatePet.Name;
+            petFromDB.Type = updatePet.Type;
+            petFromDB.BirthDate = updatePet.BirthDate;
+            petFromDB.SoldDate = updatePet.SoldDate;
+            petFromDB.Color = updatePet.Color;
+            petFromDB.PreviousOwner = updatePet.PreviousOwner;
+            petFromDB.Price = updatePet.Price;
+
+            return petFromDB;
         }
 
         public IEnumerable<Pet> GetOneTypeOfPets(string type)
         {
-            return FakeDB.GetOneTypeOfPets(type);
+            var _typePets = new List<Pet>();
+            foreach (var pet in FakeDB.pets)
+            {
+                if (type == pet.Type)
+                {
+                    _typePets.Add(pet);
+                }
+
+            }
+            return _typePets;
+            
         }
 
         public IEnumerable<Pet> OrderByPrice()
         {
-            return FakeDB.OrderByPrice();
+            List < Pet > sortetPrice = FakeDB.pets.OrderBy(Pet => Pet.Price).ToList();
+            return sortetPrice;
         }
     }
 }

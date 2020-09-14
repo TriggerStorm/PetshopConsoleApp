@@ -9,9 +9,10 @@ namespace PetShop.Core.AppService
     {
         public List<Pet> GetPets();
 
-        public Pet CreatePet(String name, String type, DateTime birthDate, DateTime soldDate, String color, String previousOwner, double price);
+        public Pet CreatePet(Pet pet);
+        //public Pet CreatePet(String name, String type, DateTime birthDate, DateTime soldDate, String color, String previousOwner, double price);
         public void RemovePet(int petID);
-        public void UpdatePet(int petId, string name, string type, DateTime birthDate, DateTime soldDate, string color, string privousOwner, double price);
+        public Pet UpdatePet(Pet UpdatePet);
         public List<Pet> GetOneTypeOfPets(String type);
         public List<Pet> OrderByPrice();
         public List<Pet> FiveCheepest();
