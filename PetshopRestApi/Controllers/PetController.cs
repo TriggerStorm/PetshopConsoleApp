@@ -18,17 +18,32 @@ namespace PetshopRestApi.Controllers
         {
             _petService = petService;
         }
-        
+
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get()
         {
             return _petService.GetPets();
         }
-        
+
         [HttpPost]
-        public void Post([FromBody] Pet pet)
+        public ActionResult<Pet> Post([FromBody] Pet pet)
         {
-            _petService.CreatePet(pet);
+            if (string.IsNullOrEmpty(pet.Name))
+            {
+                return BadRequest("Name is Required For Creating Pet");
+            }
+
+            return _petService.CreatePet(pet);
+        }
+        [HttpPut("{id}")]
+        public ActionResult<Pet> Put(int id, [FromBody] Pet pet) 
+        { 
+            if(id< 1 || id != pet.Id)
+            {
+                return BadRequest("Parameter Id and Pet Id need to be the same");
+            }
+            _petService.UpdatePet(pet);
+            return Ok();
         }
 
         
