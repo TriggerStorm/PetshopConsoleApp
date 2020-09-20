@@ -14,7 +14,7 @@ namespace PetShop.InfraStructure.Data
             if (FakeDB.pets.Count >= 1) return;
             else
             {
-                FakeDB.InitData();
+                InitData();
             }
         }
 
@@ -62,7 +62,7 @@ namespace PetShop.InfraStructure.Data
         }
         public Pet UpdatePet(Pet updatePet)
         {
-            var petFromDB = ReadyById(updatePet.Id);
+            Pet petFromDB = ReadyById(updatePet.Id);
             if (petFromDB == null) return null;
 
             petFromDB.Name = updatePet.Name;
@@ -96,6 +96,86 @@ namespace PetShop.InfraStructure.Data
         {
             List < Pet > sortetPrice = FakeDB.pets.OrderBy(Pet => Pet.Price).ToList();
             return sortetPrice;
+        }
+        public static void InitData()
+        {
+
+
+            var p1 = new Pet()
+            {
+                Id = FakeDB.id++,
+                Name = "Jimmy",
+                Type = "Doggo",
+                BirthDate = DateTime.Now.AddDays(-350),
+                SoldDate = DateTime.Now.AddDays(-1),
+                Color = "black",
+                PreviousOwner = "non",
+                Price = 200.50
+
+
+
+            };
+            FakeDB.pets.Add(p1);
+            var p2 = new Pet()
+            {
+                Id = FakeDB.id++,
+                Name = "Felix",
+                Type = "Catt",
+                BirthDate = DateTime.Now.AddDays(-80),
+                SoldDate = DateTime.Now.AddDays(-1),
+                Color = "black",
+                PreviousOwner = "non",
+                Price = 150
+            };
+            FakeDB.pets.Add(p2);
+            var p3 = new Pet()
+            {
+                Id = FakeDB.id++,
+                Name = "Felixy",
+                Type = "Catt",
+                BirthDate = DateTime.Now.AddDays(-80),
+                SoldDate = DateTime.Now.AddDays(-1),
+                Color = "black",
+                PreviousOwner = "non",
+                Price = 1500
+            };
+            FakeDB.pets.Add(p3);
+            var p4 = new Pet()
+            {
+                Id = FakeDB.id++,
+                Name = "Fel",
+                Type = "Catt",
+                BirthDate = DateTime.Now.AddDays(-80),
+                SoldDate = DateTime.Now.AddDays(-1),
+                Color = "black",
+                PreviousOwner = "non",
+                Price = 120
+            };
+            FakeDB.pets.Add(p4);
+            var p5 = new Pet()
+            {
+                Id = FakeDB.id++,
+                Name = "Fexy",
+                Type = "Catt",
+                BirthDate = DateTime.Now.AddDays(-80),
+                SoldDate = DateTime.Now.AddDays(-1),
+                Color = "black",
+                PreviousOwner = "non",
+                Price = 350
+            };
+            FakeDB.pets.Add(p5);
+            var p6 = new Pet()
+            {
+                Id = FakeDB.id++,
+                Name = "Fuu",
+                Type = "Gote",
+                BirthDate = DateTime.Now.AddDays(-80),
+                SoldDate = DateTime.Now.AddDays(-1),
+                Color = "black",
+                PreviousOwner = "non",
+                Price = 1100
+            };
+            FakeDB.pets.Add(p6);
         }
     }
 }

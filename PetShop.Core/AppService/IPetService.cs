@@ -16,6 +16,6 @@ namespace PetShop.Core.AppService
         public List<Pet> GetOneTypeOfPets(String type);
         public List<Pet> OrderByPrice();
         public List<Pet> FiveCheepest();
-
+        public Pet ReadyById(int id);
     }
 }

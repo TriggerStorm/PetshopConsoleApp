@@ -50,7 +50,27 @@ namespace PetShop.Core.AppService.Service
 
         public Pet UpdatePet(Pet UpdatePet)
         {
-            return _petRepository.UpdatePet(UpdatePet);
+            var pett = ReadyById(UpdatePet.Id);
+            //if (pett == null) return null;
+
+            pett.Name = UpdatePet.Name;
+            pett.Type = UpdatePet.Type;
+            pett.BirthDate = UpdatePet.BirthDate;
+            pett.SoldDate = UpdatePet.SoldDate;
+            pett.Color = UpdatePet.Color;
+            pett.PreviousOwner = UpdatePet.PreviousOwner;
+            pett.Price = UpdatePet.Price;
+
+
+            return pett;
+           // return _petRepository.UpdatePet(UpdatePet);
         }
+
+        public Pet ReadyById(int id)
+        {
+            return _petRepository.ReadyById(id);
+        }
+
+       
     }
 }

@@ -19,6 +19,12 @@ namespace PetshopRestApi.Controllers
             _petService = petService;
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<Pet> Get(int id)
+        {
+            return _petService.ReadyById(id);
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get()
         {
