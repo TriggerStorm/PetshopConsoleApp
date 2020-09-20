@@ -9,6 +9,8 @@ namespace PetShop.InfraStructure.Data
 {
     public class PetRepository : IPetRepository
     {
+        
+
         public PetRepository()
         {
             if (FakeDB.pets.Count >= 1) return;
@@ -31,35 +33,47 @@ namespace PetShop.InfraStructure.Data
             
         }
 
-        public void deletePet(int PetID)
+        public Pet deletePet(int PetID)
         {
-            foreach (var pet in FakeDB.pets)
-            {
-                if (FakeDB.id == pet.Id)
-                {
-                    FakeDB.pets.Remove(pet);
-                    break;
-                }
-            }
+            var petFound = ReadyById(PetID);
+            if (petFound == null) return null;
+            //FakeDB.pets.RemoveAt(1);
+            FakeDB.pets.Remove(petFound);
+            return petFound;
+
         }
 
         public Pet ReadyById(int id)
         {
-            return FakeDB.pets.
-                Select(p => new Pet()
-                { 
-                    Id = p.Id,
-                    Name = p.Name,
-                    Type = p.Type,
-                    BirthDate = p.BirthDate,
-                    SoldDate = p.SoldDate,
-                    Color = p.Color,
-                    PreviousOwner = p.PreviousOwner,
-                    Price = p.Price
-                }).
-                FirstOrDefault(p => p.Id == id);
-
+            foreach (var pet in FakeDB.pets)
+            {
+                if (pet.Id == id)
+                {
+                    return pet;
+                }
+            }
+            return null;
         }
+
+        // THIS IS SOME SHIT  WEEEEEE need to talk about !!!
+        /* public Pet ReadyById(int id) 
+         {
+             return FakeDB.pets.
+                 Select(p => new Pet()
+                 { 
+                     Id = p.Id,
+                     Name = p.Name,
+                     Type = p.Type,
+                     BirthDate = p.BirthDate,
+                     SoldDate = p.SoldDate,
+                     Color = p.Color,
+                     PreviousOwner = p.PreviousOwner,
+                     Price = p.Price
+                 }).
+                 FirstOrDefault(p => p.Id == id);
+
+         }*/
+
         public Pet UpdatePet(Pet updatePet)
         {
             Pet petFromDB = ReadyById(updatePet.Id);

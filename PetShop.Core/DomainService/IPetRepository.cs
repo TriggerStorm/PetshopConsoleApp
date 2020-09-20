@@ -11,7 +11,7 @@ namespace PetShop.Core.DomainService
         public IEnumerable<Pet> ReadPets();
 
         public Pet AddPet(Pet pet);
-        public void deletePet(int PetID);
+        public Pet deletePet(int PetID);
         public Pet UpdatePet(Pet updatePet);
         public IEnumerable<Pet> GetOneTypeOfPets(String type);
         public IEnumerable<Pet> OrderByPrice();

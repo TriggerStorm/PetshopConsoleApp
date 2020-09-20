@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 
 namespace PetShop.InfraStructure.Data
-{
+{ 
     public static class FakeDB
     {
         public static int id = 1;
-        public static readonly List<Pet> pets = new List<Pet>();
+        public static List<Pet> pets = new List<Pet>();
         
         
        

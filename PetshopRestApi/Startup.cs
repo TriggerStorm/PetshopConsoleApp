@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using PetShop.Core.AppService;
 using PetShop.Core.AppService.Service;
 using PetShop.Core.DomainService;
@@ -32,6 +33,14 @@ namespace PetshopRestApi
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
             services.AddControllers();
+
+            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {    // Use the default property (Pascal) casing
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.MaxDepth = 100;  // 100 pet limit per owner
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

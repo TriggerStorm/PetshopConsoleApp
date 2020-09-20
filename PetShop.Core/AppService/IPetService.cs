@@ -11,7 +11,7 @@ namespace PetShop.Core.AppService
 
         public Pet CreatePet(Pet pet);
         //public Pet CreatePet(String name, String type, DateTime birthDate, DateTime soldDate, String color, String previousOwner, double price);
-        public void RemovePet(int petID);
+        public Pet RemovePet(int petID);
         public Pet UpdatePet(Pet UpdatePet);
         public List<Pet> GetOneTypeOfPets(String type);
         public List<Pet> OrderByPrice();

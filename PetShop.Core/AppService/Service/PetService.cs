@@ -2,6 +2,7 @@
 using PetShop.Core.Entites;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PetShop.Core.AppService.Service
@@ -9,6 +10,7 @@ namespace PetShop.Core.AppService.Service
     public class PetService : IPetService
     {
         private IPetRepository _petRepository;
+
         public PetService(IPetRepository petRepository)
         {
             _petRepository = petRepository;
@@ -34,18 +36,18 @@ namespace PetShop.Core.AppService.Service
 
         public List<Pet> GetPets()
         {
-            
-            return (List<Pet>)_petRepository.ReadPets();
+
+            return _petRepository.ReadPets().ToList();
         }
 
         public List<Pet> OrderByPrice()
         {
-            return (List<Pet>)_petRepository.OrderByPrice();
+            return _petRepository.OrderByPrice().ToList();
         }
 
-        public void RemovePet(int petID)
+        public Pet RemovePet(int petID)
         {
-            _petRepository.deletePet(petID);
+            return _petRepository.deletePet(petID);
         }
 
         public Pet UpdatePet(Pet UpdatePet)

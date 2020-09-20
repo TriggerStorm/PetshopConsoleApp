@@ -22,6 +22,7 @@ namespace PetshopRestApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Pet> Get(int id)
         {
+            if (id < 1) return BadRequest("id must be greater then 0");
             return _petService.ReadyById(id);
         }
 
@@ -48,10 +49,19 @@ namespace PetshopRestApi.Controllers
             {
                 return BadRequest("Parameter Id and Pet Id need to be the same");
             }
-            _petService.UpdatePet(pet);
-            return Ok();
+           
+            return Ok(_petService.UpdatePet(pet));
         }
 
-        
+       [HttpDelete("{id}")]
+        public ActionResult<Pet> Delete(int id)
+        {
+            var pett = _petService.RemovePet(id);
+
+            if (pett == null) return StatusCode(404, "pet not found" + id);
+            return Ok($"pet with id {id} is deleted");
+        }
+
+
     }
 }
