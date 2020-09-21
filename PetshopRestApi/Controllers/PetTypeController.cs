@@ -18,6 +18,13 @@ namespace PetshopRestApi.Controllers
             _petTypeService = petTypeService;
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<PetType> Get(int id)
+        {
+            if (id < 1) return BadRequest("id must be greater then 0");
+            return _petTypeService.getType(id);
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<PetType>> Get()
         {
@@ -51,7 +58,7 @@ namespace PetshopRestApi.Controllers
         public ActionResult<PetType> Delete(int id)
         {
             var petType = _petTypeService.DeletePetType(id);
-
+            
             if (petType == null) return StatusCode(404, "pet not found" + id);
             return Ok($"pet with id {id} is deleted");
         }

@@ -30,6 +30,11 @@ namespace PetShop.Core.AppService.Service
             return _PetTypeRepository.ReadAllPetTypes().ToList();
         }
 
+        public PetType getType(int id)
+        {
+            return _PetTypeRepository.ReadById(id);
+        }
+
         public PetType UpdatePetType(PetType petTypeToUpdate)
         {
             return _PetTypeRepository.UpdatePetType(petTypeToUpdate);
