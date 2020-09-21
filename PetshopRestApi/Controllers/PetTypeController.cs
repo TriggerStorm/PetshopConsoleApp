@@ -21,14 +21,15 @@ namespace PetshopRestApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<PetType> Get(int id)
         {
-            if (id < 1) return BadRequest("id must be greater then 0");
-            return _petTypeService.getType(id);
+            if (id < 1) return BadRequest("500, id must be greater then 0");
+            return StatusCode(200,_petTypeService.getType(id));
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<PetType>> Get()
         {
-            return _petTypeService.GetPetTypes();
+            if (_petTypeService.GetPetTypes().Count < 0) return StatusCode(500, "list is length 0");
+            return StatusCode(200, _petTypeService.GetPetTypes());
         }
         
         [HttpPost]
@@ -39,7 +40,7 @@ namespace PetshopRestApi.Controllers
                 return BadRequest("Name is Required For Creating PetType");
             }
 
-            return _petTypeService.CreatPetType(petType);
+            return StatusCode(201, _petTypeService.CreatPetType(petType));
         }
 
         [HttpPut("{id}")]
@@ -48,10 +49,13 @@ namespace PetshopRestApi.Controllers
         {
             if (id < 1 || id != petType.TypeId)
             {
-                return BadRequest("Parameter Id and PetType Id need to be the same");
+                return BadRequest("500, Parameter Id and PetType Id need to be the same");
             }
+            var petTypes = _petTypeService.UpdatePetType(petType);
 
-            return Ok(_petTypeService.UpdatePetType(petType));
+            if (petTypes == null) return StatusCode(404, "petType not found" + id);
+
+            return StatusCode(202, _petTypeService.UpdatePetType(petType));
         }
 
         [HttpDelete("{id}")]
@@ -59,8 +63,8 @@ namespace PetshopRestApi.Controllers
         {
             var petType = _petTypeService.DeletePetType(id);
             
-            if (petType == null) return StatusCode(404, "pet not found" + id);
-            return Ok($"pet with id {id} is deleted");
+            if (petType == null) return StatusCode(404, "petType not found" + id);
+            return StatusCode(202, $"pet with id {id} is deleted");
         }
 
     }

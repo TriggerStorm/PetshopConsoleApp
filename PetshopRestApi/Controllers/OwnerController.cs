@@ -24,13 +24,13 @@ namespace PetshopRestApi.Controllers
         public ActionResult<Owner> Get(int id)
         {
             if (id < 1) return BadRequest("id must be greater then 0");
-            return _ownerService.getOwner(id);
+            return StatusCode(200, _ownerService.getOwner(id)); 
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Owner>> Get()
         {
-            return _ownerService.GetAllOwners();
+            return StatusCode(200, _ownerService.GetAllOwners());
         }
 
         [HttpPost]
@@ -38,10 +38,10 @@ namespace PetshopRestApi.Controllers
         {
             if (string.IsNullOrEmpty(owner.Name))
             {
-                return BadRequest("Name is Required For Creating Owner");
+                return BadRequest("500, Name is Required For Creating Owner");
             }
 
-            return _ownerService.CreateOwner(owner);
+            return StatusCode(201, _ownerService.CreateOwner(owner));
         }
 
         [HttpPut("{id}")]
@@ -50,19 +50,22 @@ namespace PetshopRestApi.Controllers
         {
             if (id < 1 || id != owner.OwnerId)
             {
-                return BadRequest("Parameter Id and owner Id need to be the same");
+                return BadRequest("500, Parameter Id and owner Id need to be the same");
             }
+            var owners = _ownerService.DeleteOwner(id);
 
-            return Ok(_ownerService.UpdateOwner(owner));
+            if (owners == null) return StatusCode(404, "pet not found" + id);
+
+            return StatusCode(202, _ownerService.UpdateOwner(owner));
         }
 
         [HttpDelete("{id}")]
         public ActionResult<Owner> Delete(int id)
         {
-            var petType = _ownerService.DeleteOwner(id);
+            var owner = _ownerService.DeleteOwner(id);
 
-            if (petType == null) return StatusCode(404, "pet not found" + id);
-            return Ok($"pet with id {id} is deleted");
+            if (owner == null) return StatusCode(404, "pet not found" + id);
+            return StatusCode(202, $"pet with id {id} is deleted");
         }
     }
 }

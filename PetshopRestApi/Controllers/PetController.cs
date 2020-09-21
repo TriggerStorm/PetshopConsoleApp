@@ -23,14 +23,14 @@ namespace PetshopRestApi.Controllers
         public ActionResult<Pet> Get(int id)
         {
             if (id < 1) return BadRequest("id must be greater then 0");
-            return _petService.ReadyById(id);
+            return StatusCode(200, _petService.ReadyById(id));
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get([FromQuery] string prop, string val)
         {
             if(prop == null) return _petService.GetPets();
-            return _petService.GetPetByProp(prop, val);
+            return StatusCode(200, _petService.GetPetByProp(prop, val));
             
         }
 
@@ -39,20 +39,20 @@ namespace PetshopRestApi.Controllers
         {
             if (string.IsNullOrEmpty(pet.Name))
             {
-                return BadRequest("Name is Required For Creating Pet");
+                return BadRequest("500,Name is Required For Creating Pet");
             }
 
-            return _petService.CreatePet(pet);
+            return StatusCode(201, _petService.CreatePet(pet));
         }
         [HttpPut("{id}")]
         public ActionResult<Pet> Put(int id, [FromBody] Pet pet) 
         { 
             if(id< 1 || id != pet.Id)
             {
-                return BadRequest("Parameter Id and Pet Id need to be the same");
+                return BadRequest("500,Parameter Id and Pet Id need to be the same");
             }
            
-            return Ok(_petService.UpdatePet(pet));
+            return StatusCode(202,_petService.UpdatePet(pet));
         }
 
        [HttpDelete("{id}")]
@@ -61,7 +61,7 @@ namespace PetshopRestApi.Controllers
             var pett = _petService.RemovePet(id);
 
             if (pett == null) return StatusCode(404, "pet not found" + id);
-            return Ok($"pet with id {id} is deleted");
+            return StatusCode(202, $"pet with id {id} is deleted");
         }
 
 
