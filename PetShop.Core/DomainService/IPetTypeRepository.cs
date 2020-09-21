@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PetShop.Core.DomainService
 {
-    public  interface IPetType
+    public  interface IPetTypeRepository
     {
         PetType CreatePetType(PetType petType);
 

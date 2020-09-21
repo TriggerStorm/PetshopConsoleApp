@@ -17,6 +17,10 @@ namespace PetShop.InfraStructure.Data
         // Types
         public static int Tid = 1;
         public static List<PetType> types = new List<PetType>();
+
+        // Owner
+        public static int Oid = 1;
+        public static List<Owner> owners = new List<Owner>();
         
         
        
