@@ -10,7 +10,7 @@ using PetShop.Core.Entites;
 
 namespace PetshopRestApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class OwnerController : ControllerBase
     {

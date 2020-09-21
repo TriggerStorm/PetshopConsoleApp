@@ -10,7 +10,8 @@ namespace PetShop.InfraStructure.Data
     {
         public Owner AddOwner(Owner owner)
         {
-             FakeDB.owners.Add(owner);
+            owner.OwnerId = FakeDB.Oid++;
+            FakeDB.owners.Add(owner);
             return owner;
         }
 
