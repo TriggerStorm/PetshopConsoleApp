@@ -1,4 +1,5 @@
-﻿using PetShop.Core.DomainService;
+﻿using PetShop.Core.AppService.Service;
+using PetShop.Core.DomainService;
 using PetShop.Core.Entites;
 using System;
 using System.Collections.Generic;
@@ -96,7 +97,7 @@ namespace PetShop.InfraStructure.Data
             var _typePets = new List<Pet>();
             foreach (var pet in FakeDB.pets)
             {
-                if (type == pet.Type)
+                if (type == pet.Type.ToString())
                 {
                     _typePets.Add(pet);
                 }
@@ -117,28 +118,28 @@ namespace PetShop.InfraStructure.Data
 
             var p1 = new Pet()
             {
+                
                 Id = FakeDB.id++,
                 Name = "Jimmy",
-                Type = "Doggo",
                 BirthDate = DateTime.Now.AddDays(-350),
                 SoldDate = DateTime.Now.AddDays(-1),
                 Color = "black",
-                PreviousOwner = "non",
                 Price = 200.50
 
 
 
             };
             FakeDB.pets.Add(p1);
+            
             var p2 = new Pet()
             {
                 Id = FakeDB.id++,
                 Name = "Felix",
-                Type = "Catt",
+               
                 BirthDate = DateTime.Now.AddDays(-80),
                 SoldDate = DateTime.Now.AddDays(-1),
                 Color = "black",
-                PreviousOwner = "non",
+               
                 Price = 150
             };
             FakeDB.pets.Add(p2);
@@ -146,11 +147,11 @@ namespace PetShop.InfraStructure.Data
             {
                 Id = FakeDB.id++,
                 Name = "Felixy",
-                Type = "Catt",
+               
                 BirthDate = DateTime.Now.AddDays(-80),
                 SoldDate = DateTime.Now.AddDays(-1),
                 Color = "black",
-                PreviousOwner = "non",
+              
                 Price = 1500
             };
             FakeDB.pets.Add(p3);
@@ -158,11 +159,11 @@ namespace PetShop.InfraStructure.Data
             {
                 Id = FakeDB.id++,
                 Name = "Fel",
-                Type = "Catt",
+              
                 BirthDate = DateTime.Now.AddDays(-80),
                 SoldDate = DateTime.Now.AddDays(-1),
                 Color = "black",
-                PreviousOwner = "non",
+              
                 Price = 120
             };
             FakeDB.pets.Add(p4);
@@ -170,11 +171,11 @@ namespace PetShop.InfraStructure.Data
             {
                 Id = FakeDB.id++,
                 Name = "Fexy",
-                Type = "Catt",
+               
                 BirthDate = DateTime.Now.AddDays(-80),
                 SoldDate = DateTime.Now.AddDays(-1),
                 Color = "black",
-                PreviousOwner = "non",
+              
                 Price = 350
             };
             FakeDB.pets.Add(p5);
@@ -182,11 +183,11 @@ namespace PetShop.InfraStructure.Data
             {
                 Id = FakeDB.id++,
                 Name = "Fuu",
-                Type = "Gote",
+             
                 BirthDate = DateTime.Now.AddDays(-80),
                 SoldDate = DateTime.Now.AddDays(-1),
                 Color = "black",
-                PreviousOwner = "non",
+               
                 Price = 1100
             };
             FakeDB.pets.Add(p6);
