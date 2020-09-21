@@ -13,7 +13,8 @@ namespace PetShop.Core.AppService
         //public Pet CreatePet(String name, String type, DateTime birthDate, DateTime soldDate, String color, String previousOwner, double price);
         public Pet RemovePet(int petID);
         public Pet UpdatePet(Pet UpdatePet);
-        public List<Pet> GetOneTypeOfPets(String type);
+        public List<Pet> GetOneTypeOfPets(string type);
+        public List<Pet> GetPetByProp(string prop, string val);
         public List<Pet> OrderByPrice();
         public List<Pet> FiveCheepest();
         public Pet ReadyById(int id);

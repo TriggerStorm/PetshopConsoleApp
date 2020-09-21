@@ -27,9 +27,11 @@ namespace PetshopRestApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Pet>> Get()
+        public ActionResult<IEnumerable<Pet>> Get([FromQuery] string prop, string val)
         {
-            return _petService.GetPets();
+            if(prop == null) return _petService.GetPets();
+            return _petService.GetPetByProp(prop, val);
+            
         }
 
         [HttpPost]

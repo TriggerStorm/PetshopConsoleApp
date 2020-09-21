@@ -73,6 +73,13 @@ namespace PetShop.Core.AppService.Service
             return _petRepository.ReadyById(id);
         }
 
-       
+        public List<Pet> GetPetByProp(string prop, string val)
+        {
+            IEnumerable<Pet> searchList;
+            var ListOfPets = _petRepository.ReadPets();
+            searchList = ListOfPets.Where(pet => pet.Color.ToLower().Contains(val));
+            return searchList.ToList();
+
+        }
     }
 }
