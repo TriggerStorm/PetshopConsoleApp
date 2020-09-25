@@ -51,7 +51,9 @@ namespace PetshopRestApi.Controllers
             {
                 return BadRequest("500,Parameter Id and Pet Id need to be the same");
             }
-           
+            var pett = _petService.RemovePet(id);
+
+            if (pett == null) return StatusCode(404, "pet not found" + id);
             return StatusCode(202,_petService.UpdatePet(pet));
         }
 

@@ -54,7 +54,7 @@ namespace PetshopRestApi.Controllers
             }
             var owners = _ownerService.DeleteOwner(id);
 
-            if (owners == null) return StatusCode(404, "pet not found" + id);
+            if (owners == null) return StatusCode(404, "owner not found" + id);
 
             return StatusCode(202, _ownerService.UpdateOwner(owner));
         }
@@ -64,7 +64,7 @@ namespace PetshopRestApi.Controllers
         {
             var owner = _ownerService.DeleteOwner(id);
 
-            if (owner == null) return StatusCode(404, "pet not found" + id);
+            if (owner == null) return StatusCode(404, "owner not found" + id);
             return StatusCode(202, $"pet with id {id} is deleted");
         }
     }
