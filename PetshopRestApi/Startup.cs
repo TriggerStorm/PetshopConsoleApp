@@ -39,6 +39,14 @@ namespace PetshopRestApi
 
             services.AddControllers();
 
+            services.AddCors(options =>
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    })
+            );
+
             services.AddMvc().AddNewtonsoftJson();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -46,6 +54,8 @@ namespace PetshopRestApi
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.MaxDepth = 100;  // 100 pet limit per owner
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +69,8 @@ namespace PetshopRestApi
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
